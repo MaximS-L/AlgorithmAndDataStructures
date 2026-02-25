@@ -1,0 +1,64 @@
+namespace secondprogramm
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int min = 0;
+            int max = 0;
+            int count = 0;
+            int countGame = 0;
+            Random rnd = new Random();
+            char answer = 'Y';
+            
+            do
+            {
+                int counter = 0;
+                int number = rnd.Next(1, 100);
+                Console.WriteLine("try guess number?");
+                while (true)
+                {
+                    counter++;
+                    int userNumber = 0;
+                    Console.WriteLine("input number from [1;100]");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (!int.TryParse(Console.ReadLine(), out userNumber)
+                            || userNumber > 100 || userNumber < 1)
+
+                            Console.WriteLine("");
+                        else break;
+                        if (i == 2)
+                        {
+                            Console.WriteLine("you are stupid");
+                            return;
+                        }
+                    }
+                    if (userNumber > number)
+                        Console.WriteLine("your number is greater");
+                    else if (userNumber < number)
+                        Console.WriteLine("your number is less");
+
+                    else
+                    {
+                        Console.WriteLine("you are win!");
+
+                        if (min == 0 || min > counter) min = counter;
+                        max = max < counter ? count : max;
+                        count += counter;
+                        countGame++;
+                        break;
+                    }
+                }
+                Console.WriteLine("do you want play game");
+                answer = Convert.ToChar(Console.Read());
+            } while (answer == 'Y');
+            Console.WriteLine($"min = {min} max = {max} avg = {(double)count / countGame}");
+        }
+    }
+}
+
+// 1. методы класса. Разбить программу на методы, а в мейн все вызвать
+// метод - должен нести одну SOLID -  S - single respon principle
+// 2. GitHub аккаунт -  создать репозиторий с окрытой лицензией (public) с лицензией MIT с gitigore c VS имя репозитория AlgorithmAndDataStructures
+// в описание что нибдуь полезное. Сделать push через MicrosoftVS домашнего задания, написать в комитт то что мы закодировали
